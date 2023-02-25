@@ -66,7 +66,7 @@ def fees_report(infile, outfile):
         writer = DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for key in fee:
-            writer.writerow({'patron_id' : key, 'late_fees' : fee[key]})
+            writer.writerow({ key, fee[key]})
 
 
 # The following main selection block will only run when you choose
