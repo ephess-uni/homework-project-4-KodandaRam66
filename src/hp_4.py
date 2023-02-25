@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from csv import DictReader, DictWriter
 from collections import defaultdict
 
-
 def reformat_dates(old_dates):
     """Accepts a list of date strings in format yyyy-mm-dd, re-formats each
     element to a format dd mmm yyyy--01 Jan 2001."""
@@ -15,7 +14,6 @@ def reformat_dates(old_dates):
         start = start.strftime('%d %b %Y')
         new_dates.append(str(start))
     return new_dates
-
 
 def date_range(start, n):
     """For input date string `start`, with format 'yyyy-mm-dd', returns
@@ -33,7 +31,6 @@ def date_range(start, n):
         start = start + timedelta(days=1)
     return added_dates
 
-
 def add_date_range(values, start_date):
     """Adds a daily date range to the list `values` beginning with
     `start_date`.  The date, value pairs are returned as tuples
@@ -42,7 +39,6 @@ def add_date_range(values, start_date):
     con_dates = tuple(dates)
     con_values = tuple(values)
     return list(zip(con_dates, con_values))
-
 
 def fees_report(infile, outfile):
     """Calculates late fees per patron id and writes a summary report to
