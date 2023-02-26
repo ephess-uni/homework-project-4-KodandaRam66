@@ -44,7 +44,7 @@ def fees_report(infile, outfile):
     """Calculates late fees per patron id and writes a summary report to
     outfile."""
     formatstr = '%m/%d/%Y'
-    fee = dict()
+    fee = defaultdict(float)
     with open(infile, newline='') as f:
         reader = DictReader(f)
         for row in reader:
@@ -59,14 +59,14 @@ def fees_report(infile, outfile):
                 rem = rem * 0.25
             else:
                 rem = 0.00
-            rem = format(rem,".2f")
-            fee[patron_id] = rem
+            fee[patron_id] += rem
     with open(outfile, 'w', newline='') as f:
         fieldnames = ['patron_id','late_fees']
         writer = DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for key in fee:
-            writer.writerow({'patron_id' : key, 'late_fees' : fee[key]})
+            value = format(fee[key],".2f")
+            writer.writerow({'patron_id' : key, 'late_fees' : value})
 
 
 # The following main selection block will only run when you choose
