@@ -55,7 +55,7 @@ def fees_report(infile, outfile):
             date_returned = datetime.strptime(date_returned, formatstr)
             rem = date_due - date_returned
             rem = rem.days
-            if rem > 0:
+            if rem < 0:
                 rem = rem * 0.25
             else:
                 rem = 0.00
@@ -65,7 +65,8 @@ def fees_report(infile, outfile):
         writer = DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for key in fee:
-            value = format(fee[key],".2f")
+            value = abs(fee[key])
+            value = format(value,".2f")
             writer.writerow({'patron_id' : key, 'late_fees' : value})
 
 
